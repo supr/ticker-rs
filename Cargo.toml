@@ -1,0 +1,4 @@
+[package]
+name = "ticker"
+version = "0.1.0"
+authors = ["Prudhvi Krishna Surapaneni <me@prudhvi.net>"]
