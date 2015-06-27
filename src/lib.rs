@@ -11,19 +11,14 @@ pub struct Ticker {
 impl Ticker {
     pub fn new(tick_on: u32) -> Ticker {
         let (sender, receiver) = mpsc::channel::<()>();
-        Ticker { tick_on: tick_on, sender: sender, receiver: receiver }
-    }
-
-    //TODO: Try to arm the ticker during initialization
-    pub fn arm(&self) {
-        let tick_on = self.tick_on;
-        let tx = self.sender.clone();
+        let tx = sender.clone();
         thread::spawn(move|| {
             loop {
                 thread::sleep_ms(tick_on);
                 tx.send(()).unwrap();
             }
         });
+        Ticker { tick_on: tick_on, sender: sender, receiver: receiver }
     }
 }
 
